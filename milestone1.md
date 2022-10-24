@@ -25,6 +25,7 @@ A basketball coach/player application linked style, that allows a user to create
 User will Login to either their Coach or Player profiles and then be moved to the general homepage. Remeber password, and have the option to skip the login and go straight to the homepage.
 
 ![Screenshot_9](https://user-images.githubusercontent.com/113072996/197439662-6a98aea9-b81e-460a-a12a-46893203b542.png)
+![S22222creenshot 2022-10-23 235501](https://user-images.githubusercontent.com/113072996/197445737-195d5755-fb7b-4c40-9279-fef7ee6f93dd.png)
 
 ## Home Page:
 The image above is the application's home page. A general feed will appear in the center, about players and events that are being hosted by coaches. Users can go and check their profiles from here and create events if they are coaches. At the top users can search other players, coaches, events, etc in order to navigate the site. 
