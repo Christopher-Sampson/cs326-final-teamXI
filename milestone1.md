@@ -24,5 +24,12 @@ A basketball coach/player application linked style, that allows a user to create
 ![image (1)](https://user-images.githubusercontent.com/113072996/197432728-b57afa63-81da-4bdc-80ba-4b55e7ddfd01.png)
 User will Login to either their Coach or Player profiles and then be moved to the general homepage. Remeber password, and have the option to skip the login and go straight to the homepage.
 
+![Screenshot_9](https://user-images.githubusercontent.com/113072996/197439662-6a98aea9-b81e-460a-a12a-46893203b542.png)
+
 ## Home Page:
-The page above is the application's home page. A general feed will appear in the center, about players and events that are being hosted by coaches. Users can go and check their profiles from here and create events if they are coaches. At the top users can search other players, coaches, events, etc in order to navigate the site.
+The image above is the application's home page. A general feed will appear in the center, about players and events that are being hosted by coaches. Users can go and check their profiles from here and create events if they are coaches. At the top users can search other players, coaches, events, etc in order to navigate the site. 
+
+l![image (1)](https://user-images.githubusercontent.com/113072996/197439496-35adb6b5-91f6-435c-adf6-0dcb519855b7.png)
+
+## Player Profile Page:
+This is a player's profile page. A user can upload images as aprofile picture or upload images of themselves and clips on their games. They can put in their personal information, like location, phone number, and more. They also have a small text box to describe themselves in further detail.
