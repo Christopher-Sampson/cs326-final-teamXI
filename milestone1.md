@@ -32,4 +32,10 @@ The image above is the application's home page. A general feed will appear in th
 l![image (1)](https://user-images.githubusercontent.com/113072996/197439496-35adb6b5-91f6-435c-adf6-0dcb519855b7.png)
 
 ## Player Profile Page:
-This is a player's profile page. A user can upload images as aprofile picture or upload images of themselves and clips on their games. They can put in their personal information, like location, phone number, and more. They also have a small text box to describe themselves in further detail.
+This is a player's profile page. A user can upload images as a profile picture or upload images of themselves and clips on their games. They can put in their personal information, like location, phone number, and more. They also have a small text box to describe themselves in further detail.
+
+## Coach Profile Page:
+This is a coach's profile page similar to a players page but they can see their list of followed players and have their team and any events they are hosting on display.
+
+
+
