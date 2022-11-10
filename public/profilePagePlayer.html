@@ -26,6 +26,11 @@
       $(function(){
         $("#navbar").load("navbar.html"); 
       });
+      const dbArray = ["databaseAttributes.db","databaseComment.db", "databasePost.db", "databaseProfile.db"];
+      for (i in dbArray){
+        const response = await fetch(i);
+        const dbJSON = await response.json();
+      }
       </script>
 
       <style type="text/css">
@@ -107,9 +112,9 @@
                   <div class="d-flex flex-column align-items-center text-center">
                     <img src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" alt="Admin" class="rounded-circle" width="150">
                     <div class="mt-3">
-                      <h4>john smith</h4>
-                      <p class="text-secondary mb-1">Point Guard</p>
-                      <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                      <h4><div> id="personName" </div></h4>
+                      <p class="text-secondary mb-1"><div> id="personPosition" </div></p>
+                      <p class="text-muted font-size-sm"><div> id="personLocation" </div></p>
                       <button class="btn btn-primary">Follow</button>
                       <button class="btn btn-outline-primary">Message</button>
                     </div>
@@ -139,7 +144,7 @@
                       <h6 class="mb-0">Full Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      john smith
+                      <div> id="personName" </div>
                     </div>
                   </div>
                   <hr>
@@ -148,7 +153,7 @@
                       <h6 class="mb-0">Email</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      jsmith@gmail.com
+                      <div> id="personEmail" </div>
                     </div>
                   </div>
                   <hr>
@@ -157,7 +162,7 @@
                       <h6 class="mb-0">Phone</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      (239) 816-9029
+                      <div> id="personPhoneNumber" </div>
                     </div>
                   </div>
                   <hr>
@@ -167,7 +172,7 @@
                       <h6 class="mb-0">Address</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      Bay Area, San Francisco, CA
+                      <div> id="personLocation" </div>
                     </div>
                   </div>
                   <hr>
@@ -184,27 +189,27 @@
                   <div class="card h-100">
                     <div class="card-body">
                       <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2"></i>Attributes</h6>
-                      <small>Shooting</small>
+                      <small><div> id="personAttribute1" </div></small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
-                      <small>Passing</small>
+                      <small><div> id="personAttribute2" </div></small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
-                      <small>Dribbling</small>
+                      <small><div> id="personAttribute3" </div></small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
-                      <small>Rebounding</small>
+                      <small><div> id="personAttribute4" </div></small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
-                      <small>Defense</small>
+                      <small><div> id="personAttribute5" </div></small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
-                      <small>LeaderShip</small>
+                      <small><div> id="personAttribute6" </div></small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 40%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
