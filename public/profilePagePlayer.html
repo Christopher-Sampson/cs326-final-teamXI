@@ -27,10 +27,11 @@
         $("#navbar").load("navbar.html"); 
       });
       const dbArray = ["databaseAttributes.db","databaseComment.db", "databasePost.db", "databaseProfile.db"];
-      for (i in dbArray){
-        const response = await fetch(i);
-        const dbJSON = await response.json();
-      }
+      const responseAttr = await fetch(dbArray[0]);
+      const dbAttrJSON = await responseAttr.json();
+      const responseProfile = await fetch(dbArray[3]);
+      const dbProfileJSON = await responseProfile.json();
+      console.log(responseAttr);
       </script>
 
       <style type="text/css">
