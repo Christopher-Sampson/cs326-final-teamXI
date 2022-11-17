@@ -1,7 +1,7 @@
-const http = require('express');
+const express = require('express');
 const app = express();
 app.use(express.static('public'));
-app.use(express.json({limit: '1mb'}));
+
 
 const databaseProfile = new Datastore('databaseProfile.db');
 const databaseComment = new Datastore('databaseComment.db');
@@ -14,24 +14,28 @@ databaseAttributes.loadDatabase();
 databasePost.loadDatabase();
 
 
-app.get('/profile/name', (req, res) => {//Shld work
-  
-  res.send(databaseProfile.find({ name: req.body}, (err, data) => { //Might change name to id but for now name is fine
+
+//Search profile using a function from database.js and return to client
+app.get('/profile/name', (req, res) => {//Shld be working waiting on testing
+  res.send((err, data) => { //Might change name to id but for now name is fine
     if (err) {
       response.end();
       return "Does not Exist";
     }
-    response.json(data);
-  }));
+    // req.body should be a object like {name/id: "profile name/id to look up"}
+    return lookUpProfile(req.body); //Some function that will find req.body based on the databse (function is in database.js) the function is not final
+    // lookUpProfile is a work in progress function name.
+  });
+
 });
 
+//Parse info appropriately then return to the correct function from databse.js and then return info to client.
 app.post('/profile/new', (req, res) => { //request is a object with profile data
   const data = req.body;
-  databaseProfile.insert(data);
+  profileInsert(data);// Some function that inserts req.body into the appropriate database. (profile insert is a work in progress function atm)
   res.json({
     status: 'success'
   });
-
 });
 
 app.put('profile/edit', (req, res) => {

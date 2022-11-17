@@ -5,19 +5,21 @@ async function getProfile(Name) {
         body: JSON.stringify(Name),
     });
     const data = await response.json();
-    return data;
+    return data;// Dont return this render it on the html page instead.
 };
 
 async function NewProfile(profileObject) {
     
-    const requestOptions = {
+    const request = {
         method: 'POST',    
         body: JSON.stringify(profileObject),
     };   
     
-    const response = await fetch('/profile/new', requestOptions);
+    const response = await fetch('/profile/new', request);
     const data = await response.json();
+    
     return data;
+    
 };
 
 async function EditProfile(name, UpdateObject) {//Name is a string, UpdateObject is a object with the key to be updated
