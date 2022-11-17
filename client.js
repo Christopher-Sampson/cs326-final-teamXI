@@ -1,14 +1,14 @@
 
-async function getProfile(Name) {
+async function getProfile(Name) {//Should be working well now
     const response = await fetch('/profile/name', {
         method: 'GET',
         body: JSON.stringify(Name),
     });
     const data = await response.json();
-    return data;// Dont return this render it on the html page instead.
+    return data;// Dont return this, render it on the html page instead using innerHTML.
 };
 
-async function NewProfile(profileObject) {
+async function NewProfile(profileObject) {//Should also work, no need to render it on html since its just going on the database
     
     const request = {
         method: 'POST',    
@@ -19,7 +19,7 @@ async function NewProfile(profileObject) {
     const data = await response.json();
     
     return data;
-    
+
 };
 
 async function EditProfile(name, UpdateObject) {//Name is a string, UpdateObject is a object with the key to be updated
@@ -32,7 +32,7 @@ async function EditProfile(name, UpdateObject) {//Name is a string, UpdateObject
 
     const response = await fetch('/profile/edit', requestOptions);
     const data = await response.json();
-    //element.innderHTML = data; something like this
+    //element.innderHTML = data; something like this to render it on the profile
 };
 
 async function DeleteProfile(name) {
