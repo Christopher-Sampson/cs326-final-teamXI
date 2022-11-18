@@ -21,17 +21,6 @@ databasePost.loadDatabase();*/
 //post data then return the newly made profile page
 
 
-
-
-
-
-
-
-
-
-
-
-
 //Search profile using a function from database.js and return to client
 app.get('/profile/name', (req, res) => {//Shld be working waiting on testing
   res.send((err, data) => { //Might change name to id but for now name is fine
