@@ -3,7 +3,7 @@ const app = express();
 app.use(express.static('public'));
 
 
-const databaseProfile = new Datastore('databaseProfile.db');
+/*const databaseProfile = new Datastore('databaseProfile.db');
 const databaseComment = new Datastore('databaseComment.db');
 const databaseAttributes = new Datastore('databaseAttributes.db');
 const databasePost = new Datastore('databasePost.db');
@@ -11,7 +11,20 @@ const databasePost = new Datastore('databasePost.db');
 databaseProfile.loadDatabase();
 databaseComment.loadDatabase();
 databaseAttributes.loadDatabase();
-databasePost.loadDatabase();
+databasePost.loadDatabase();*/
+
+//Behavior for login
+//post data then return the newly made profile page
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -23,7 +36,7 @@ app.get('/profile/name', (req, res) => {//Shld be working waiting on testing
       return "Does not Exist";
     }
     // req.body should be a object like {name/id: "profile name/id to look up"}
-    return lookUpProfile(req.body); //Some function that will find req.body based on the databse (function is in database.js) the function is not final
+    return //lookUpProfile(req.body); Some function that will find req.body based on the databse (function is in database.js) the function is not final
     // lookUpProfile is a work in progress function name.
   });
 
@@ -82,11 +95,7 @@ app.post('/comment/new', (req, res) => {//request is a object with the new comme
 
 app.remove('/post/delete', (req, res) => { 
   const data = req.body; 
-  databasePost.remove(
-    {$expr: {$eq: [data, "$post"]}}
-
-
-  );
+  //function that removes req from the database.
   res.json({
     status: 'success'
   }); 
