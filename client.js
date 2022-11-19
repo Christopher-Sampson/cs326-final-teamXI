@@ -1,3 +1,4 @@
+const { response } = require("express");
 
 async function getProfile(Name) {//Should be working well now
     const response = await fetch('/profile/name', {
@@ -42,19 +43,27 @@ async function DeleteProfile(name) {
 }
 
 async function NewPost(postObject) {   
+    const resposne = await fetch('/');
+    const data = await response.json();
+    return "Success!";
 
 };
 
 async function NewComment(commentObject) {
+    const respsone = await  fetch('/', commentObject);
+    const data = await response.json();
 
 };
 
 async function EditAtttributes(postObject) {
 
+
 };
 
 async function DeletePost(postObject) {
 
+
+    return "Success!"
 };
 
 async function DeleteComment(commentObject) {
