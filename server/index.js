@@ -1,28 +1,25 @@
 const express = require('express');
-const app = express();
-app.use(express.static('public'));
+const express = express();
+const path = require('path');
+const PORT = 8080; // process.env.PORT || 8080;
 
-//Behavior for login
-//post data then return the newly made profile page
-
-app.post('/post/new', (req, res) => {//request is a object with the new post
+express.use(express.static(path.join(_dirname, 'public')))
+.post('/post/new', (req, res) => {//request is a object with the new post
   const data = req.body; 
   //insert function that will add req.body to the database from database.js
   res.json({
     status: 'success'
   }); 
-});
-
-app.post('/comment/new', (req, res) => {//request is a object with the new comment
+})
+.post('/comment/new', (req, res) => {//request is a object with the new comment
   const data = req.body; 
   databaseComment.insert(data);
   res.json({
     status: 'success'
   }); 
-});
-
+})
 //Search profile using a function from database.js and return to client
-app.get('/profile/name', (req, res) => {//Shld be working waiting on testing
+.get('/profile/name', (req, res) => {//Shld be working waiting on testing
   res.send((err, data) => { //Might change name to id but for now name is fine
     if (err) {
       response.end();
@@ -32,19 +29,16 @@ app.get('/profile/name', (req, res) => {//Shld be working waiting on testing
     return //lookUpProfile(req.body); Some function that will find req.body based on the databse (function is in database.js) the function is not final
     // lookUpProfile is a work in progress function name.
   });
-
-});
-
+})
 //Parse info appropriately then return to the correct function from databse.js and then return info to client.
-app.post('/profile/new', (req, res) => { //request is a object with profile data
+.post('/profile/new', (req, res) => { //request is a object with profile data
   const data = req.body;
  // Some function that inserts req.body into the appropriate database. (profile insert is a work in progress function atm)
   res.json({
     status: 'success'
   });
-});
-
-app.put('profile/edit', (req, res) => {
+})
+.put('profile/edit', (req, res) => {
   const data = req.body
 
   //some function that updates the profile
@@ -52,10 +46,8 @@ app.put('profile/edit', (req, res) => {
   res.json({
     status: 'success'
   });
-
-});
-
-app.put('profile/Attributes', (req, res, name, update) => {
+})
+.put('profile/Attributes', (req, res, name, update) => {
   const data = req.body;
   //some function that updates the profile
 
@@ -63,39 +55,35 @@ app.put('profile/Attributes', (req, res, name, update) => {
     status: 'success'
   });
 
-});
-
-app.remove('/post/delete', (req, res) => { 
+})
+.remove('/post/delete', (req, res) => { 
    const data = req.body; 
    //some function that removes the post from the database
    res.json({
      status: 'success'
    }); 
-
- });
-
-app.post('/user/new', (req, res) => {
+})
+.post('/user/new', (req, res) => {
 
   //some function that will put the new user into users database.
 
-});
-
-app.get('/user/login', (req, res) => {
+})
+.get('/user/login', (req, res) => {
 
 //some function that will return the user to be found and then return sucess at a match
 
-});
+})
 
-app.get('/comment/delete', (req, res) => {
+.get('/comment/delete', (req, res) => {
 
 //Deletes a comment from the comment database.
 
-});
+})
 
-app.remove('/user/profile/delete', (req, res) => {
+.remove('/user/profile/delete', (req, res) => {
 
 //removes user from user base and all other bases associated with that user.
 
-});
+})
 
-app.listen(8080, () => console.log("Listening at 8080"));
+.listen(PORT, () => console.log(`Listening on ${ PORT }`));
