@@ -7,7 +7,7 @@ const pool = new Pool({
     }
 });
 
-const client = await pool.connect(
+const client = pool.connect(
   err => {
     if(err) {
       console.error("connection error", err.stack)
