@@ -70,6 +70,7 @@ app.put('profile/Attributes', (req, res, name, update) => {
 
 });
 
+
 app.post('/post/new', (req, res) => {//request is a object with the new post
   const data = req.body; 
   databasePost.insert(data);
