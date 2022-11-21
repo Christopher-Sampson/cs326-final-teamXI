@@ -1,0 +1,9 @@
+1.) Sent to login page
+2.) Prompt with login or create account
+3.) If login ( Get and return profile associated with username login)
+4.) If create account then bring to page to make a user login (username and password) post that into userlogins, then sent to a page to make a profile, post profile data into profile database.
+5.)Then display/return with a get profile on page with rendered data
+6.)Have buttons to edit data if necessary, such as remove, insert, edit. Using put and remove?
+Think out about comments.
+
+When making new post pop up a text box.
