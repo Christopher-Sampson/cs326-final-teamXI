@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 8080;
+const path = require('path');
 let secrets;
 secrets = require('./secrets.json');
 const crud = require('./database');
@@ -10,7 +11,7 @@ app.use(express.static('public'))
 
 app.get('/', (req, res) =>{
 
-  res.send('./public/index.html');
+  res.sendFile(path.join(__dirname, '/public/index.html'));
 
 });
 
