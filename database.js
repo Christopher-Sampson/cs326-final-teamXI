@@ -102,9 +102,15 @@ async function remove(request, type){
       break;
 
     case "attribute":
-      client.query(`DELETE FROM accounts WHERE id = ${request.id}`);
+      client.query(`DELETE FROM attributes WHERE profile_id = ${request.id}`);
       break;
 
+    case "posts":
+      client.query(`DELETE FROM posts WHERE profile_id = ${request.id}`);
+
+    case "comments":
+      client.query(`DELETE FROM comments WHERE commentor_id = ${request.id}`);
+      
     default:
       return "Invalid type";
 
