@@ -1,9 +1,14 @@
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 8080;
+const { Pool } = require('pg');
+let secrets;
+secrets = require('./secrets.json');
+import { remove,create,read,update } from './database';
 
-app.use(express.static('public'));
-app.post('/post/new', (req, res) => {//request is a object with the new post
+
+app.use(express.static('public'))
+.post('/post/new', (req, res) => {//request is a object with the new post
   const data = req.body; 
   //insert function that will add req.body to the database from database.js
   res.json({
@@ -60,6 +65,7 @@ app.put('profile/Attributes', (req, res, name, update) => {
   });
 
 });
+
 app.delete('/post/delete', (req, res) => { 
    const data = req.body; 
    //some function that removes the post from the database
@@ -67,11 +73,13 @@ app.delete('/post/delete', (req, res) => {
      status: 'success'
    }); 
 });
+
 app.post('/user/new', (req, res) => {
 
   //some function that will put the new user into users database.
 
 });
+
 app.get('/user/login', (req, res) => {
 
 //some function that will return the user to be found and then return sucess at a match
@@ -89,5 +97,51 @@ app.delete('/user/profile/delete', (req, res) => {
 //removes user from user base and all other bases associated with that user.
 
 });
+
+/*let password;
+if(!process.env.PASSWORD) {
+  secrets = require('./secrets.json');
+  password = secrets.password;
+} else {
+  password = process.env.PASSWORD;
+}*/
+
+//Another way of doing it that involves password
+/*const client = new Client({
+  host: secrets.host,
+  database: secrets.database,
+  port: secrets.port,
+  user: secrets.user,
+  password: secrets.password,
+});*/
+
+const URL = secrets.URI || process.env.DATABASE_URL;
+const pool = new Pool({
+    connectionString: URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
+});
+
+app.get('/db', async (req, res) => {
+  try {
+    const client = await pool.connect(
+      err => {
+        if(err) {
+          console.error("connection error", err.stack)
+        } else {
+          console.log('connected')
+        }
+      }
+    );
+    const result = await client.query('SELECT * FROM test_table');
+    const results = { 'results': (result) ? result.rows : null};
+    res.render('pages/db', results );
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+})
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
