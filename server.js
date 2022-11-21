@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 8080;
-const { Pool } = require('pg');
 let secrets;
 secrets = require('./secrets.json');
 const crud = require('./database');

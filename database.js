@@ -1,4 +1,4 @@
-
+const { Pool } = require('pg');
 const URL =  process.env.DATABASE_URL || secrets.URI;
 const pool = new Pool({
     connectionString: URL,
@@ -7,7 +7,7 @@ const pool = new Pool({
     }
 });
 
-const client = pool.connect(
+const client = await pool.connect(
   err => {
     if(err) {
       console.error("connection error", err.stack)
