@@ -115,7 +115,7 @@ if(!process.env.PASSWORD) {
   password: secrets.password,
 });*/
 
-const URL = secrets.URI || process.env.DATABASE_URL;
+const URL =  process.env.DATABASE_URL || secrets.URI;
 const pool = new Pool({
     connectionString: URL,
     ssl: {
