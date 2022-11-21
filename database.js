@@ -1,6 +1,6 @@
 
 //create function // hi
-export async function create(request, type){
+async function create(request, type){
   
   switch(type){
     case "account":
@@ -30,7 +30,7 @@ export async function create(request, type){
 }
 
 //read function
-export async function read(request, type){
+async function read(request, type){
   
   switch(type){
     case "account":
@@ -61,7 +61,7 @@ export async function read(request, type){
 }
 
 //update function
-export async function update(request, type){
+async function update(request, type){
   
   switch(type){
     case "account":
@@ -83,7 +83,7 @@ export async function update(request, type){
 }
 
 //delete function
-export async function remove(request, type){
+async function remove(request, type){
   
   switch(type){
     case "account":
