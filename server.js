@@ -11,7 +11,7 @@ app.use(express.static('public'))
 
 app.get('/', (req, res) =>{
 
-  res.render('./public/Index');
+  res.render('./public/Index', {});
 
 })
 
