@@ -8,11 +8,11 @@ const crud = require('./database');
 
 app.use(express.static('public'))
 
-/*app.get('/', (req, res) =>{
+app.get('/', (req, res) =>{
 
-  res.render('./public/Index', {});
+  res.sendFile('./public/index.html', {});
 
-});*/
+});
 
 
 //Parse info appropriately then return to the correct function from databse.js and then return info to client.
