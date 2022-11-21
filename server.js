@@ -17,7 +17,46 @@ app.get('/', (req, res) =>{
 
 
 
-.post('/post/new', (req, res) => {//request is a object with the new post
+
+
+
+//Parse info appropriately then return to the correct function from databse.js and then return info to client.
+app.post('/profile/new', (req, res) => { //request is a object with profile data
+  const data = req.body;
+  profileInsert(data);// Some function that inserts req.body into the appropriate database. (profile insert is a work in progress function atm)
+  res.json({
+    status: 'success'
+  });
+});
+
+app.put('profile/edit', (req, res) => {
+  const data = req.body.UpdateObject;
+  databaseProfile.update(
+  { name: data.name }, //Might change name to id but for now name is fine
+  { $set: { data } },
+  );
+
+  res.json({
+    status: 'success'
+  });
+
+});
+
+app.put('profile/Attributes', (req, res, name, update) => {
+  const data = req.body;
+  databaseAttributes.update(
+  { name: name }, //Might change name to id but for now name is fine
+  { $set: { update} },
+  );
+
+  res.json({
+    status: 'success'
+  });
+
+});
+
+
+app.post('/post/new', (req, res) => {//request is a object with the new post
   const data = req.body; 
   //insert function that will add req.body to the database from database.js
   res.json({
