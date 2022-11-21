@@ -1,25 +1,40 @@
 
-//create function // hi
+const URL =  process.env.DATABASE_URL || secrets.URI;
+const pool = new Pool({
+    connectionString: URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
+});
+
+const client = await pool.connect(
+  err => {
+    if(err) {
+      console.error("connection error", err.stack)
+    } else {
+      console.log('connected')
+    }
+  }
+);
+
+//create function
 async function create(request, type){
-  
+
   switch(type){
-    case "account":
-
-      break;
-    case "profile":
-    //code block
+    case "accounts":
+      client.query('INSERT INTO accounts', request);
       break;
 
-    case "post":
-    //code block
+    case "posts":
+      client.query('INSERT INTO posts', request);
       break;
 
-    case "comment":
-    //code block
+    case "comments":
+      client.query('INSERT INTO comments', request);
       break;
 
-    case "attribute":
-    //code block
+    case "attributes":
+      client.query('INSERT INTO attributes', request);
       break;
 
     default:
@@ -33,25 +48,22 @@ async function create(request, type){
 async function read(request, type){
   
   switch(type){
-    case "account":
-    //code block
+    case "accounts":
+      const data = client.query(`SELECT username FROM accounts WHERE username = ${request}`);
+      return data;
+
+    /*case "posts":
+      client.query(`SELECT id FROM posts WHERE id = ${request}`);
       break;
 
-    case "profile":
-    //code block
+    case "comments":
+      client.query(`SELECT id FROM comments WHERE id = ${request}`);
       break;
 
-    case "post":
-    //code block
-      break;
-
-    case "comment":
-    //code block
-      break;
-
-    case "attribute":
-    //code block
-      break;
+    case "attributes":
+      client.query('SELECT * FROM attributes', request);
+      break;*/
+      //not required per the api BUT could be usefull to implement later
 
     default:
       return "Invalid type";
@@ -64,16 +76,12 @@ async function read(request, type){
 async function update(request, type){
   
   switch(type){
-    case "account":
-    //code block
+    case "accounts":
+      client.query(`UPDATE accounts SET ${request.update} WHERE id = ${request.id} `);
       break;
 
-    case "profile":
-    //code block
-      break;
-
-    case "attribute":
-    //code block
+    case "attributes":
+      client.query(`UPDATE attributes SET ${request.update} WHERE id = ${request.id} `);
       break;
 
     default:
@@ -87,15 +95,14 @@ async function remove(request, type){
   
   switch(type){
     case "account":
-    //code block
-      break;
-
-    case "profile":
-    //code block
+      client.query(`DELETE FROM accounts WHERE id = ${request.id} and username =${request.username}`);
+      client.query(`DELETE FROM posts WHERE profile_id = ${request.id}`);
+      client.query(`DELETE FROM attributes WHERE profile_id = ${request.id}`);
+      client.query(`DELETE FROM comments WHERE commentor_id = ${request.id}`);
       break;
 
     case "attribute":
-    //code block
+      client.query(`DELETE FROM accounts WHERE id = ${request.id}`);
       break;
 
     default:
