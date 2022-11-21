@@ -7,13 +7,13 @@ secrets = require('./secrets.json');
 const crud = require('./database');
 
 
-app.use(express.static('public'))
+app.use('/', express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) =>{
+/*app.get('/', (req, res) =>{
 
-  res.sendFile(path.join(__dirname, '/public/index.html'));
+  res.sendFile(path.join(__dirname + '/public/index.html'));
 
-});
+});*/
 
 
 //Parse info appropriately then return to the correct function from databse.js and then return info to client.
