@@ -8,6 +8,15 @@ const crud = require('./database');
 
 
 app.use(express.static('public'))
+
+app.get('/', (req, res) =>{
+
+  res.render('./public/Index.html');
+
+})
+
+
+
 .post('/post/new', (req, res) => {//request is a object with the new post
   const data = req.body; 
   //insert function that will add req.body to the database from database.js
