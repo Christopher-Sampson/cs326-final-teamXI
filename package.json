@@ -1,6 +1,6 @@
 {
-  "engines": {
-    "node": "14.x"
+  "scripts": {
+    "start" : "./server/server.js"
   },
   "dependencies": {
     "bootstrap": "^5.2.2",
