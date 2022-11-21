@@ -4,7 +4,7 @@ const PORT = process.env.PORT || 8080;
 const { Pool } = require('pg');
 let secrets;
 secrets = require('./secrets.json');
-import './database';
+let crud = require('./database');
 
 
 app.use(express.static('public'))
