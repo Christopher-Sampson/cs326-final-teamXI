@@ -7,14 +7,7 @@ secrets = require('./secrets.json');
 const crud = require('./database');
 
 
-app.use(express.static('public'))
-
-/*app.get('/', (req, res) =>{
-
-  res.sendFile(path.join(__dirname + '/public/index.html'));
-
-});
-
+app.use('/', express.static('./public'));
 
 //Parse info appropriately then return to the correct function from databse.js and then return info to client.
 app.post('/profile/new', (req, res) => { //request is a object with account data
