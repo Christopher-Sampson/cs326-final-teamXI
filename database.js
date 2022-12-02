@@ -18,7 +18,7 @@ const client = pool.connect(
 );
 
 //create function
-async function create(request, type){
+exports.create = async function (request, type){
 
   switch(type){
     case "accounts":
@@ -45,7 +45,7 @@ async function create(request, type){
 }
 
 //read function
-async function read(request, type){
+exports.read = async function (request, type){
   
   switch(type){
     case "accounts":
@@ -73,7 +73,7 @@ async function read(request, type){
 }
 
 //update function
-async function update(request, type){
+exports.update = async function(request, type){
   
   switch(type){
     case "accounts":
@@ -91,7 +91,7 @@ async function update(request, type){
 }
 
 //delete function
-async function remove(request, type){
+exports.remove = async function(request, type){
   
   switch(type){
     case "account":
@@ -116,3 +116,4 @@ async function remove(request, type){
 
   }
 }
+
