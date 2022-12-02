@@ -17,6 +17,7 @@ app.post('/profile/new', (req, res) => { //request is a object with account data
   res.json({
     status: 'success'
   });
+  
 });
 
 app.put('profile/edit', (req, res) => {//req.body shld be an object with {id: "someid to the profile", update: {values to be updated} }

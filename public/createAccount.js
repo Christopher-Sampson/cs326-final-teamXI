@@ -13,14 +13,21 @@ document.getElementById("register").addEventListener("click", ()=>{
         profile.iscoach = false;
     }
     //console.log(profile);
-        
-    const request = {
-            method: 'POST',    
-            body: JSON.stringify(profile),
-        };   
-        const response = await fetch('/profile/new', request);
+
+    const response = await fetch('/profile/new', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'basketballsite/json;charset=utf-8'
+        },
+        body: JSON.stringify(profile)
+    });
+
+    if(response.ok){
         const data = await response.json();
-        
-       //return data;
+        alert(data.status);
+    }
+    else{
+        alert(response.status);
+    }
     //return profile;
 });
