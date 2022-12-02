@@ -12,11 +12,11 @@ app.use('/', express.static('./public'));
 //Parse info appropriately then return to the correct function from databse.js and then return info to client.
 app.post('/profile/new', (req, res) => { //request is a object with account data
 
-  crud.create(req.body, "accounts");// Some function that inserts req.body into the appropriate database.
+  crud.create(req.params.body, "accounts");// Some function that inserts req.body into the appropriate database.
 
-  res.json({
+  res.json(JSON.stringify({
     status: 'success'
-  });
+  }));
 
 });
 
