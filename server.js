@@ -12,17 +12,17 @@ app.use('/', express.static('./public'));
 //Parse info appropriately then return to the correct function from databse.js and then return info to client.
 app.post('/profile/new', (req, res) => { //request is a object with account data
 
-  create(req.body, "accounts");// Some function that inserts req.body into the appropriate database.
+  crud.create(req.body, "accounts");// Some function that inserts req.body into the appropriate database.
 
   res.json({
     status: 'success'
   });
-  
+
 });
 
 app.put('profile/edit', (req, res) => {//req.body shld be an object with {id: "someid to the profile", update: {values to be updated} }
 
-  update(req.body, "accounts");// Some function that updates the profile with the specific id with the updates wanted
+  crud.update(req.body, "accounts");// Some function that updates the profile with the specific id with the updates wanted
 
   res.json({
     status: 'success'
@@ -32,7 +32,7 @@ app.put('profile/edit', (req, res) => {//req.body shld be an object with {id: "s
 
 app.put('profile/Attributes', (req, res) => {//req.body shld be an object with {id: "someid to the attributes", update: {values to be updated} }
   
-  update(req.body, "attributes");
+  crud.update(req.body, "attributes");
 
   res.json({
     status: 'success'
@@ -42,7 +42,7 @@ app.put('profile/Attributes', (req, res) => {//req.body shld be an object with {
 
 app.post('/post/new', (req, res) => {//request is a object with the new post
   
-  create(req.body, "posts");//function that will add req.body to the post table from database.js
+  crud.create(req.body, "posts");//function that will add req.body to the post table from database.js
 
   res.json({
     status: 'success'
@@ -51,7 +51,7 @@ app.post('/post/new', (req, res) => {//request is a object with the new post
 
 app.post('/comment/new', (req, res) => {//request is a object with the new comment
   
-  create(req.body, "comments");
+  crud.create(req.body, "comments");
 
   res.json({
     status: 'success'
@@ -67,13 +67,13 @@ app.get('/profile/name', (req, res) => {//Shld be working waiting on testing
       return "Does not Exist";
     }
     // req.body should be a object like {name/id: "profile name/id to look up"}
-    return read(req.body, "accounts")// Some function that will find req.body based on the databse
+    return crud.read(req.body, "accounts")// Some function that will find req.body based on the databse
   });
 });
 
 app.delete('/post/delete', (req, res) => { 
    //some function that removes the post from the database
-   remove(req.body, "posts");
+   crud.remove(req.body, "posts");
 
    res.json({
      status: 'success'
@@ -83,13 +83,13 @@ app.delete('/post/delete', (req, res) => {
 app.delete('/comment/delete', (req, res) => {
 
 //Deletes a comment from the comment database.
-  remove(req.body, "comments");
+  crud.remove(req.body, "comments");
 
 });
 
 app.delete('/profile/delete', (req, res) => { //req.body is like {id: "profile id", username: "profiles username"}
 
-  remove(req.body, "profile")//removes user from profile table and all other tables associated with that user.
+  crud.remove(req.body, "profile")//removes user from profile table and all other tables associated with that user.
 
 });
 
