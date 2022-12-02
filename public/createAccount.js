@@ -1,4 +1,4 @@
-document.getElementById("register").addEventListener("click", ()=>{
+document.getElementById("register").addEventListener("click", async()=>{
     const profile = {};
     profile.name = document.getElementById("fullname").value;
     profile.username = document.getElementById("username").value;
