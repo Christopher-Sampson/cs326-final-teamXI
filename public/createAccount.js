@@ -12,6 +12,15 @@ document.getElementById("register").addEventListener("click", ()=>{
     }else{
         profile.iscoach = false;
     }
-    console.log(profile);
-    return profile;
+    //console.log(profile);
+        
+    const request = {
+            method: 'POST',    
+            body: JSON.stringify(profile),
+        };   
+        const response = await fetch('/profile/new', request);
+        const data = await response.json();
+        
+       //return data;
+    //return profile;
 });
