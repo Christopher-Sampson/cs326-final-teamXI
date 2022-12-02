@@ -93,7 +93,7 @@ app.delete('/profile/delete', (req, res) => { //req.body is like {id: "profile i
 });
 
 app.get('*', (req, res) => {
-  response.send(JSON.stringify({result: "command-not-found"}));
+  res.send(JSON.stringify({result: "command-not-found"}));
 });
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
