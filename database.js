@@ -1,5 +1,6 @@
-const { Pool } = require('pg');
+const { Pool, Client } = require('pg');
 const URL =  process.env.DATABASE_URL || secrets.URI;
+
 const pool = new Pool({
     connectionString: URL,
     ssl: {
@@ -21,27 +22,29 @@ const client = pool.connect(
 exports.create = async function (request, type){
 
   switch(type){
-    case "accounts":
-      client.query('INSERT INTO accounts(name,username,password,email,phone,twitter,instagram,iscoach) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)', 
+    case "accounts": 
+      await client.query('INSERT INTO accounts(name,username,password,email,phone,twitter,instagram,iscoach) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)', 
       [request.name,request.username,request.password,request.email,request.phone,request.twitter,request.instagram,request.iscoach]);
       break;
 
     case "posts":
-      client.query('INSERT INTO posts', request);
+      await client.query('INSERT INTO posts', request);
       break;
 
     case "comments":
-      client.query('INSERT INTO comments', request);
+      await client.query('INSERT INTO comments', request);
       break;
 
     case "attributes":
-      client.query('INSERT INTO attributes', request);
+      await client.query('INSERT INTO attributes', request);
       break;
 
     default:
       return "Invalid type";
 
   }
+
+  await client.end();
 
 }
 
