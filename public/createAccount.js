@@ -1,4 +1,4 @@
-document.getElementById("register").addEventListener("click", ()=>{
+document.getElementById("register").addEventListener("click", async()=>{
     const profile = {};
     profile.name = document.getElementById("fullname").value;
     profile.username = document.getElementById("username").value;
@@ -12,6 +12,22 @@ document.getElementById("register").addEventListener("click", ()=>{
     }else{
         profile.iscoach = false;
     }
-    console.log(profile);
-    return profile;
+    //console.log(profile);
+
+    const response = await fetch('/profile/new', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'basketballsite/json;charset=utf-8'
+        },
+        body: JSON.stringify(profile)
+    });
+
+    if(response.ok){
+        const data = await response.json();
+        alert(data.status);
+    }
+    else{
+        alert(response.status);
+    }
+    //return profile;
 });

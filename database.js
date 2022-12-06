@@ -1,25 +1,42 @@
+const { Pool, Client } = require('pg');
+const URL =  process.env.DATABASE_URL || secrets.URI;
 
-//create function // hi
-async function create(request, type){
-  
+const pool = new Pool({
+    connectionString: URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
+});
+
+const client = pool.connect(
+  err => {
+    if(err) {
+      console.error("connection error", err.stack)
+    } else {
+      console.log('connected')
+    }
+  }
+);
+
+//create function
+exports.create = async function (request, type){
+
   switch(type){
-    case "account":
-
-      break;
-    case "profile":
-    //code block
+    case "accounts": 
+      await client.query('INSERT INTO accounts(name,username,password,email,phone,twitter,instagram,iscoach) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)', 
+      [request.name,request.username,request.password,request.email,request.phone,request.twitter,request.instagram,request.iscoach]);
       break;
 
-    case "post":
-    //code block
+    case "posts":
+      await client.query('INSERT INTO posts', request);
       break;
 
-    case "comment":
-    //code block
+    case "comments":
+      await client.query('INSERT INTO comments', request);
       break;
 
-    case "attribute":
-    //code block
+    case "attributes":
+      await client.query('INSERT INTO attributes', request);
       break;
 
     default:
@@ -27,31 +44,30 @@ async function create(request, type){
 
   }
 
+  await client.end();
+
 }
 
 //read function
-async function read(request, type){
+exports.read = async function (request, type){
   
   switch(type){
-    case "account":
-    //code block
+    case "accounts":
+      const data = client.query(`SELECT username FROM accounts WHERE username = ${request}`);
+      return data;
+
+    /*case "posts":
+      client.query(`SELECT id FROM posts WHERE id = ${request}`);
       break;
 
-    case "profile":
-    //code block
+    case "comments":
+      client.query(`SELECT id FROM comments WHERE id = ${request}`);
       break;
 
-    case "post":
-    //code block
-      break;
-
-    case "comment":
-    //code block
-      break;
-
-    case "attribute":
-    //code block
-      break;
+    case "attributes":
+      client.query('SELECT * FROM attributes', request);
+      break;*/
+      //not required per the api BUT could be usefull to implement later
 
     default:
       return "Invalid type";
@@ -61,19 +77,15 @@ async function read(request, type){
 }
 
 //update function
-async function update(request, type){
+exports.update = async function(request, type){
   
   switch(type){
-    case "account":
-    //code block
+    case "accounts":
+      client.query(`UPDATE accounts SET ${request.update} WHERE id = ${request.id} `);
       break;
 
-    case "profile":
-    //code block
-      break;
-
-    case "attribute":
-    //code block
+    case "attributes":
+      client.query(`UPDATE attributes SET ${request.update} WHERE id = ${request.id} `);
       break;
 
     default:
@@ -83,23 +95,29 @@ async function update(request, type){
 }
 
 //delete function
-async function remove(request, type){
+exports.remove = async function(request, type){
   
   switch(type){
     case "account":
-    //code block
-      break;
-
-    case "profile":
-    //code block
+      client.query(`DELETE FROM accounts WHERE id = ${request.id} and username =${request.username}`);
+      client.query(`DELETE FROM posts WHERE profile_id = ${request.id}`);
+      client.query(`DELETE FROM attributes WHERE profile_id = ${request.id}`);
+      client.query(`DELETE FROM comments WHERE commentor_id = ${request.id}`);
       break;
 
     case "attribute":
-    //code block
+      client.query(`DELETE FROM attributes WHERE profile_id = ${request.id}`);
       break;
 
+    case "posts":
+      client.query(`DELETE FROM posts WHERE profile_id = ${request.id}`);
+
+    case "comments":
+      client.query(`DELETE FROM comments WHERE commentor_id = ${request.id}`);
+      
     default:
       return "Invalid type";
 
   }
 }
+
