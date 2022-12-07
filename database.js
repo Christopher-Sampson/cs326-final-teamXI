@@ -24,7 +24,6 @@ exports.create = async function (request, type){
 
   switch(type){
     case "accounts": 
-      console.log(request);
       await pool.query('INSERT INTO accounts (name,username,password,email,phone,twitter,instagram,iscoach) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)', 
       [request.name,request.username,request.password,request.email,request.phone,request.twitter,request.instagram,request.iscoach]);
       break;
