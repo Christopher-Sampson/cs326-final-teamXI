@@ -53,7 +53,7 @@ exports.read = async function (request, type){
   switch(type){
     case "accounts":
       const data = await pool.query(`SELECT username FROM accounts WHERE username = ${request.username}`);
-      return data;
+      return data.rows;
 
     /*case "posts":
       client.query(`SELECT id FROM posts WHERE id = ${request}`);

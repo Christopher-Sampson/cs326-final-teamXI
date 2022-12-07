@@ -27,5 +27,5 @@ document.getElementById("register").addEventListener("click", async x =>{
     else{
         alert("NOT WORKING");
     }
-    //return profile;
+
 });
