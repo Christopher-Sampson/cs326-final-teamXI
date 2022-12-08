@@ -1,18 +1,17 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 8080;
+const secrets = require('./secrets.json');
+const PORT = process.env.PORT || secrets.port;
 const path = require('path');
-let secrets;
-secrets = require('./secrets.json');
 const crud = require('./database');
 
-
+//app.use( bodyParser.urlencoded({extended: true}));
+app.use( express.json() );
 app.use('/', express.static('./public'));
 
 //Parse info appropriately then return to the correct function from databse.js and then return info to client.
 app.post('/profile/new', (req, res) => { //request is a object with account data
-
-  crud.create(req.params.body, "accounts");// Some function that inserts req.body into the appropriate database.
+  crud.create(req.body, "accounts");// Some function that inserts req.body into the appropriate database.
 
   res.json(JSON.stringify({
     status: 'success'
@@ -94,7 +93,8 @@ app.delete('/profile/delete', (req, res) => { //req.body is like {id: "profile i
 });
 
 app.get('*', (req, res) => {
-  res.send(JSON.stringify({result: "command-not-found"}));
+  res.sendFile('index.html', { root: path.join(__dirname, '../public') });
+  //Send into login page and force user to login again.
 });
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));

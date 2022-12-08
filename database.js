@@ -1,4 +1,5 @@
 const { Pool, Client } = require('pg');
+let secrets = require('./secrets.json');
 const URL =  process.env.DATABASE_URL || secrets.URI;
 
 const pool = new Pool({
@@ -23,28 +24,26 @@ exports.create = async function (request, type){
 
   switch(type){
     case "accounts": 
-      await client.query('INSERT INTO accounts(name,username,password,email,phone,twitter,instagram,iscoach) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)', 
+      await pool.query('INSERT INTO accounts (name,username,password,email,phone,twitter,instagram,iscoach) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)', 
       [request.name,request.username,request.password,request.email,request.phone,request.twitter,request.instagram,request.iscoach]);
       break;
 
     case "posts":
-      await client.query('INSERT INTO posts', request);
+      await pool.query('INSERT INTO posts', request);
       break;
 
     case "comments":
-      await client.query('INSERT INTO comments', request);
+      await pool.query('INSERT INTO comments', request);
       break;
 
     case "attributes":
-      await client.query('INSERT INTO attributes', request);
+      await pool.query('INSERT INTO attributes', request);
       break;
 
     default:
       return "Invalid type";
 
   }
-
-  await client.end();
 
 }
 
@@ -53,8 +52,8 @@ exports.read = async function (request, type){
   
   switch(type){
     case "accounts":
-      const data = client.query(`SELECT username FROM accounts WHERE username = ${request}`);
-      return data;
+      const data = await pool.query(`SELECT username FROM accounts WHERE username = ${request.username}`);
+      return data.rows;
 
     /*case "posts":
       client.query(`SELECT id FROM posts WHERE id = ${request}`);
@@ -81,11 +80,11 @@ exports.update = async function(request, type){
   
   switch(type){
     case "accounts":
-      client.query(`UPDATE accounts SET ${request.update} WHERE id = ${request.id} `);
+      pool.query(`UPDATE accounts SET ${request.update} WHERE id = ${request.id} `);
       break;
 
     case "attributes":
-      client.query(`UPDATE attributes SET ${request.update} WHERE id = ${request.id} `);
+      pool.query(`UPDATE attributes SET ${request.update} WHERE id = ${request.id} `);
       break;
 
     default:
@@ -99,21 +98,21 @@ exports.remove = async function(request, type){
   
   switch(type){
     case "account":
-      client.query(`DELETE FROM accounts WHERE id = ${request.id} and username =${request.username}`);
-      client.query(`DELETE FROM posts WHERE profile_id = ${request.id}`);
-      client.query(`DELETE FROM attributes WHERE profile_id = ${request.id}`);
-      client.query(`DELETE FROM comments WHERE commentor_id = ${request.id}`);
+      pool.query(`DELETE FROM accounts WHERE id = ${request.id} and username =${request.username}`);
+      pool.query(`DELETE FROM posts WHERE profile_id = ${request.id}`);
+      pool.query(`DELETE FROM attributes WHERE profile_id = ${request.id}`);
+      pool.query(`DELETE FROM comments WHERE commentor_id = ${request.id}`);
       break;
 
     case "attribute":
-      client.query(`DELETE FROM attributes WHERE profile_id = ${request.id}`);
+      pool.query(`DELETE FROM attributes WHERE profile_id = ${request.id}`);
       break;
 
     case "posts":
-      client.query(`DELETE FROM posts WHERE profile_id = ${request.id}`);
+      pool.query(`DELETE FROM posts WHERE profile_id = ${request.id}`);
 
     case "comments":
-      client.query(`DELETE FROM comments WHERE commentor_id = ${request.id}`);
+      pool.query(`DELETE FROM comments WHERE commentor_id = ${request.id}`);
       
     default:
       return "Invalid type";
