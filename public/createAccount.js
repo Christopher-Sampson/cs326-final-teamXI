@@ -19,6 +19,7 @@ document.getElementById("register").addEventListener("click", async x =>{
         img.setAttribute("height", "100");
         img.setAttribute("width", "100");
         divImage.appendChild(img);
+        console.log("hi");
 
     }
     
