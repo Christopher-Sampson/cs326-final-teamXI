@@ -12,6 +12,15 @@ document.getElementById("register").addEventListener("click", async x =>{
     }else{
         profile.iscoach = false;
     }
+    const divImage = document.getElementById("imgGrid");
+    for (i = 1; i < 11; i++){
+        const img = document.createElement(i.toString());
+        img.setAttribute("src", "public/images/" + i.toString());
+        img.setAttribute("height", "100");
+        img.setAttribute("width", "100");
+        divImage.appendChild(img);
+
+    }
     
     const response = await fetch('/profile/new', {
         method: 'POST',
