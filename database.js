@@ -51,18 +51,19 @@ export async function read(request, type){
   
   switch(type){
     case "accounts":
-      const data = await pool.query(`SELECT username FROM accounts WHERE username = ${request.username}`);
-      return data.rows;
+      
+      const data = await pool.query('SELECT * FROM accounts WHERE username = $1',[request.usersname] );
+      return data.rows[0];
 
-    /*case "posts":
-      client.query(`SELECT id FROM posts WHERE id = ${request}`);
-      break;
+    case "posts":
+      const data2 = await pool.query(`SELECT * FROM posts WHERE id = $1`,[request.id]);
+      return data2.rows[0];
 
     case "comments":
-      client.query(`SELECT id FROM comments WHERE id = ${request}`);
-      break;
+      const data3 = await pool.query(`SELECT * FROM comments WHERE id = $1`,[request.id]);
+      return data3.rows[0];
 
-    case "attributes":
+    /*case "attributes":
       client.query('SELECT * FROM attributes', request);
       break;*/
       //not required per the api BUT could be usefull to implement later

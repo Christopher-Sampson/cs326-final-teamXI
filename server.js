@@ -20,7 +20,7 @@ app.post('/profile/new', (req, res) => { //request is a object with account data
 
   req.body.salt = salt;
   req.body.password = hash;  
-  
+
   /*if(profile.password.length < 12){
     alert("Password not long enough");
 }
@@ -82,17 +82,13 @@ app.post('/comment/new', (req, res) => {//request is a object with the new comme
   }); 
 });
 
-//Search profile using a function from database.js and return to client
-app.get('/profile/name', (req, res) => {//Shld be working waiting on testing
-  
-  res.send((err, data) => { //Might change name to id but for now name is fine
-    if (err) {
-      response.end();
-      return "Does not Exist";
-    }
-    // req.body should be a object like {name/id: "profile name/id to look up"}
-    return crud.read(req.body, "accounts")// Some function that will find req.body based on the databse
-  });
+
+app.put('/profile/name', async (req, res) => {
+
+const result = await crud.read(req.body, "accounts");
+
+res.send(result);
+
 });
 
 app.delete('/post/delete', (req, res) => { 
