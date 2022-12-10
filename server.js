@@ -20,11 +20,12 @@ app.post('/profile/new', (req, res) => { //request is a object with account data
 
   req.body.salt = salt;
   req.body.password = hash;  
-  if(profile.password.length < 12){
+  
+  /*if(profile.password.length < 12){
     alert("Password not long enough");
 }
 
-/*if(profile.username == "Dog"//use read to find if username is already in db.
+if(profile.username == "Dog"//use read to find if username is already in db.
 ){
     alert("Username is taken");
 }
