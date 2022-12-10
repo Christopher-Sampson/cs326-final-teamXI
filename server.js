@@ -24,14 +24,14 @@ app.post('/profile/new', (req, res) => { //request is a object with account data
     alert("Password not long enough");
 }
 
-if(profile.username == "Dog"//use read to find if username is already in db.
+/*if(profile.username == "Dog"//use read to find if username is already in db.
 ){
     alert("Username is taken");
 }
 
 if(profile.phone.toString().length > 9){
     alert("Invalid Phone number");
-}
+}*/
 
 
   crud.create(req.body, "accounts");// Some function that inserts req.body into the appropriate database.
