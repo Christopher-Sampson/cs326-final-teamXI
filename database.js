@@ -1,5 +1,6 @@
-const { Pool, Client } = require('pg');
-let secrets = require('./secrets.json');
+import pkg from 'pg';
+const { Pool } = pkg;
+import secrets from './secrets.json'assert {type: "json"};
 const URL =  process.env.DATABASE_URL || secrets.URI;
 
 const pool = new Pool({
@@ -9,7 +10,7 @@ const pool = new Pool({
     }
 });
 
-const client = pool.connect(
+ pool.connect(
   err => {
     if(err) {
       console.error("connection error", err.stack)
@@ -19,13 +20,12 @@ const client = pool.connect(
   }
 );
 
-//create function
-exports.create = async function (request, type){
+export async function create (request, type){
 
   switch(type){
     case "accounts": 
-      await pool.query('INSERT INTO accounts (name,username,password,email,phone,twitter,instagram,iscoach) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)', 
-      [request.name,request.username,request.password,request.email,request.phone,request.twitter,request.instagram,request.iscoach]);
+      await pool.query('INSERT INTO accounts (name,username,password,email,phone,twitter,instagram,iscoach,address,salt) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)', 
+      [request.name,request.username,request.password,request.email,request.phone,request.twitter,request.instagram,request.iscoach,request.address,request.salt]);
       break;
 
     case "posts":
@@ -47,8 +47,7 @@ exports.create = async function (request, type){
 
 }
 
-//read function
-exports.read = async function (request, type){
+export async function read(request, type){
   
   switch(type){
     case "accounts":
@@ -75,8 +74,7 @@ exports.read = async function (request, type){
 
 }
 
-//update function
-exports.update = async function(request, type){
+export async function update(request, type){
   
   switch(type){
     case "accounts":
@@ -93,8 +91,7 @@ exports.update = async function(request, type){
   }
 }
 
-//delete function
-exports.remove = async function(request, type){
+export async function remove(request, type){
   
   switch(type){
     case "account":
@@ -119,4 +116,3 @@ exports.remove = async function(request, type){
 
   }
 }
-

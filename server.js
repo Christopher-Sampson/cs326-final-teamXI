@@ -1,17 +1,41 @@
-const express = require('express');
+import express from 'express';
 const app = express();
-const secrets = require('./secrets.json');
+import secrets from './secrets.json'assert {type: "json"};
 const PORT = process.env.PORT || secrets.port;
-const path = require('path');
-const crud = require('./database');
+import * as path from 'path';
+import * as crud from './database.js';
+import { MiniCrypt } from "./miniCrypt.js";
+const mc = new MiniCrypt();
 
-//app.use( bodyParser.urlencoded({extended: true}));
+
+
 app.use( express.json() );
 app.use('/', express.static('./public'));
 
 //Parse info appropriately then return to the correct function from databse.js and then return info to client.
 app.post('/profile/new', (req, res) => { //request is a object with account data
+  
+  
+  const [salt,hash] = mc.hash(req.body.password);
+
+  req.body.salt = salt;
+  req.body.password = hash;  
+  if(profile.password.length < 12){
+    alert("Password not long enough");
+}
+
+if(profile.username == "Dog"//use read to find if username is already in db.
+){
+    alert("Username is taken");
+}
+
+if(profile.phone.toString().length > 9){
+    alert("Invalid Phone number");
+}
+
+
   crud.create(req.body, "accounts");// Some function that inserts req.body into the appropriate database.
+
 
   res.json(JSON.stringify({
     status: 'success'

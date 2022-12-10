@@ -1,3 +1,4 @@
+
 document.getElementById("register").addEventListener("click", async x =>{
     const profile = {};
     profile.name = document.getElementById("fullname").value;
@@ -12,7 +13,7 @@ document.getElementById("register").addEventListener("click", async x =>{
     }else{
         profile.iscoach = false;
     }
-    const divImage = document.getElementById("imgGrid");
+    /*const divImage = document.getElementById("imgGrid");
     for (i = 1; i < 11; i++){
         const img = document.createElement(i.toString());
         img.setAttribute("src", "public/images/" + i.toString());
@@ -21,8 +22,7 @@ document.getElementById("register").addEventListener("click", async x =>{
         divImage.appendChild(img);
         console.log("hi");
 
-    }
-    
+    }*/
     const response = await fetch('/profile/new', {
         method: 'POST',
         headers: {
