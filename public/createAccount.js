@@ -24,6 +24,8 @@ document.getElementById("register").addEventListener("click", async x =>{
         console.log("hi");
 
     }*/
+
+
     const response = await fetch('/profile/new', {
         method: 'POST',
         headers: {
@@ -36,8 +38,6 @@ document.getElementById("register").addEventListener("click", async x =>{
         localStorage.setItem('username', profile.username);
         window.location.href= "profilePage.html";
     }
-    else{
-        alert("NOT WORKING");
-    }
+
 
 });

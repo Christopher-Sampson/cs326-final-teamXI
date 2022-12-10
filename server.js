@@ -5,6 +5,7 @@ const PORT = process.env.PORT || secrets.port;
 import * as path from 'path';
 import * as crud from './database.js';
 import { MiniCrypt } from "./miniCrypt.js";
+import { checkPrime } from 'crypto';
 const mc = new MiniCrypt();
 
 
@@ -20,20 +21,6 @@ app.post('/profile/new', (req, res) => { //request is a object with account data
 
   req.body.salt = salt;
   req.body.password = hash;  
-
-  /*if(profile.password.length < 12){
-    alert("Password not long enough");
-}
-
-if(profile.username == "Dog"//use read to find if username is already in db.
-){
-    alert("Username is taken");
-}
-
-if(profile.phone.toString().length > 9){
-    alert("Invalid Phone number");
-}*/
-
 
   crud.create(req.body, "accounts");// Some function that inserts req.body into the appropriate database.
 
@@ -91,6 +78,25 @@ res.send(result);
 
 });
 
+
+app.put('/login/name', async (req, res) => {
+
+  const check = req.body.passwords;
+
+  const response = await crud.read(req.body, "accounts");
+  
+  if(mc.check(check ,response.salt,response.password)){
+    res.send(response);
+  }
+  else{
+    res.send("Not Valid Password");
+  }
+  
+
+  
+  
+});
+
 app.delete('/post/delete', (req, res) => { 
    //some function that removes the post from the database
    crud.remove(req.body, "posts");
@@ -115,7 +121,6 @@ app.delete('/profile/delete', (req, res) => { //req.body is like {id: "profile i
 
 app.get('*', (req, res) => {
   res.sendFile('index.html', { root: path.join(__dirname, '../public') });
-  //Send into login page and force user to login again.
 });
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));

@@ -29,15 +29,18 @@ export async function create (request, type){
       break;
 
     case "posts":
-      await pool.query('INSERT INTO posts', request);
+      await pool.query('INSERT INTO posts (id,profile_id,title,description,timeposted) VALUES ($1,$2,$3,$4,$5)',
+      [request.id,request.profile_id,request.description, request.timeposted]);
       break;
 
     case "comments":
-      await pool.query('INSERT INTO comments', request);
+      await pool.query('INSERT INTO comments (id,commentor_id,post_id,description,timeposted) VALUES ($1,$2,$3,$4,$5)',
+      [request.id,request.commentor_id,request.post_id,request.description,request.timeposted]);
       break;
 
     case "attributes":
-      await pool.query('INSERT INTO attributes', request);
+      await pool.query('INSERT INTO attributes (id,profile_id,att1,att2,att3,att4,att5,att6) VALUES ($1,$2,$3,$4,$5)' ,
+      [request.id,request.profile_id,request.att1,request.att2,request.att3,request.att4,request.att5,request.att6]);
       break;
 
     default:
@@ -77,13 +80,15 @@ export async function read(request, type){
 
 export async function update(request, type){
   
-  switch(type){
+  switch(type){         
     case "accounts":
-      pool.query(`UPDATE accounts SET ${request.update} WHERE id = ${request.id} `);
+      pool.query(`UPDATE accounts SET name = $1, username = $2, password = $3, email = $4, phone = $5, twitter = $6, instagram = $7, iscoach = $8, address = $9, salt = $10 WHERE id = $11`,
+      [request.name,request.username,request.password, request.email, request.phone, request.twitter, request.instagram, request.iscoach, request.address, request.salt, request.id]);
       break;
 
     case "attributes":
-      pool.query(`UPDATE attributes SET ${request.update} WHERE id = ${request.id} `);
+      pool.query(`UPDATE attributes SET att1 = $1, att2 = $2, att3 = $3, att4 = $4, att5 = $5, att6 = $6 WHERE id = $7`,
+      [request.att1,request.att2,request.att3,request.att4,request.att5,request.att6,request.id]);
       break;
 
     default:
@@ -96,21 +101,21 @@ export async function remove(request, type){
   
   switch(type){
     case "account":
-      pool.query(`DELETE FROM accounts WHERE id = ${request.id} and username =${request.username}`);
-      pool.query(`DELETE FROM posts WHERE profile_id = ${request.id}`);
-      pool.query(`DELETE FROM attributes WHERE profile_id = ${request.id}`);
-      pool.query(`DELETE FROM comments WHERE commentor_id = ${request.id}`);
+      pool.query(`DELETE FROM accounts WHERE id = $1, AND username =$2`,[request.id,request.username]);
+      pool.query(`DELETE FROM posts WHERE profile_id = $1`,[request.id]);
+      pool.query(`DELETE FROM attributes WHERE profile_id = $1`,[request.id]);
+      pool.query(`DELETE FROM comments WHERE commentor_id = $1`,[request.id]);
       break;
 
     case "attribute":
-      pool.query(`DELETE FROM attributes WHERE profile_id = ${request.id}`);
+      pool.query(`DELETE FROM attributes WHERE profile_id =$1`,[request.id]);
       break;
 
     case "posts":
-      pool.query(`DELETE FROM posts WHERE profile_id = ${request.id}`);
+      pool.query(`DELETE FROM posts WHERE profile_id = $1`,[request.id]);
 
     case "comments":
-      pool.query(`DELETE FROM comments WHERE commentor_id = ${request.id}`);
+      pool.query(`DELETE FROM comments WHERE commentor_id = $1`,[request.id]);
       
     default:
       return "Invalid type";

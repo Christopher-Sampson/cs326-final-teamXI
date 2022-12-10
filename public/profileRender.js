@@ -15,7 +15,6 @@ async function render(username){
 };
 
 const profile = await render(username);
-console.log(profile);
 
 document.getElementById("fullname").innerHTML = profile.name;
 document.getElementById("personLocation").innerHTML = profile.address;
@@ -23,3 +22,5 @@ document.getElementById("personPhoneNumber").innerHTML = profile.phone;
 document.getElementById("twitter").innerHTML = profile.twitter;
 document.getElementById("instagram").innerHTML = profile.instagram;
 document.getElementById("personEmail").innerHTML = profile.email;
+document.getElementById("personUsername").innerHTML = profile.username;
+//document.getElementById("positionLocation").innserHTML =
