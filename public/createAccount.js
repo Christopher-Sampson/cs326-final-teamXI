@@ -8,6 +8,7 @@ document.getElementById("register").addEventListener("click", async x =>{
     profile.phone = document.getElementById("phone").value;
     profile.twitter = document.getElementById("twitter").value;
     profile.instagram = document.getElementById("instagram").value;
+    profile.address = document.getElementById("address").value;
     if (document.getElementById("iscoach").checked){
         profile.iscoach = true;
     }else{
@@ -32,6 +33,7 @@ document.getElementById("register").addEventListener("click", async x =>{
     });
     
     if(response.ok){
+        localStorage.setItem('username', profile.username);
         window.location.href= "profilePage.html";
     }
     else{

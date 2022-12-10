@@ -19,7 +19,6 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"defer ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"defer ></script>
 
-
     <!-- https://www.bootdey.com/snippets/view/profile-with-data-and-skills -->
     <script> 
       $(function(){
@@ -90,7 +89,7 @@
         }
       </style>
 
-
+  <script type='module' src= "profileRender.js"defer></script>
 </head>
 
 <header>
@@ -143,8 +142,8 @@
                     <div class="col-sm-3">
                       <h6 class="mb-0">Full Name</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
-                      <div> id="personName" </div>
+                    <div id = "fullname" class="col-sm-9 text-secondary">
+                      <div> </div>
                     </div>
                   </div>
                   <hr>
@@ -152,8 +151,8 @@
                     <div class="col-sm-3">
                       <h6 class="mb-0">Email</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
-                      <div> id="personEmail" </div>
+                    <div id="personEmail" class="col-sm-9 text-secondary">
+                      <div>  </div>
                     </div>
                   </div>
                   <hr>
@@ -161,8 +160,8 @@
                     <div class="col-sm-3">
                       <h6 class="mb-0">Phone</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
-                      <div> id="personPhoneNumber" </div>
+                    <div id="personPhoneNumber" class="col-sm-9 text-secondary">
+                      <div>  </div>
                     </div>
                   </div>
                   <hr>
@@ -171,11 +170,12 @@
                     <div class="col-sm-3">
                       <h6 class="mb-0">Address</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
-                      <div> id="personLocation" </div>
+                    <div id="personLocation" class="col-sm-9 text-secondary">
+                      <div>  </div>
                     </div>
                   </div>
                   <hr>
+                  
                   <div class="row">
                     <div class="col-sm-12">
                       <a class="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
@@ -189,27 +189,27 @@
                   <div class="card h-100">
                     <div class="card-body">
                       <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2"></i>Attributes</h6>
-                      <small><div> id="personAttribute1" </div></small>
+                      <small><div> Cooperation </div></small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
-                      <small><div> id="personAttribute2" </div></small>
+                      <small><div> Dribbling </div></small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
-                      <small><div> id="personAttribute3" </div></small>
+                      <small><div>  Passing </div></small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
-                      <small><div> id="personAttribute4" </div></small>
+                      <small><div> Shooting </div></small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
-                      <small><div> id="personAttribute5" </div></small>
+                      <small><div> Stamina </div></small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
-                      <small><div> id="personAttribute6" </div></small>
+                      <small><div> Speed </div></small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 40%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
