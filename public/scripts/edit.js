@@ -29,7 +29,7 @@ document.getElementById("save").addEventListener("click", async x =>{
 
     if(response.status == 200){
         localStorage.setItem('username', profile.username);
-        window.location.href= "profilePage.html";
+        window.location.href= `profilePage.html?username=${profile.username}`;
     }
     else{
         alert("Invalid parameter");

@@ -1,5 +1,6 @@
 
 const username = localStorage.getItem('username');
+
 async function render(username){
 
     const requestOptions = {
@@ -7,7 +8,7 @@ async function render(username){
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: username })
     };
-    const response = await fetch("/profile/name",requestOptions);
+    const response = await fetch("/profile/name/",requestOptions);
     const data = await response.json();
     return data;
 
@@ -22,9 +23,6 @@ document.getElementById("twitter").innerHTML = profile.twitter;
 document.getElementById("instagram").innerHTML = profile.instagram;
 document.getElementById("personEmail").innerHTML = profile.email;
 document.getElementById("personUsername").innerHTML = profile.username;
-/*if(profile.isCoach)
-document.getElementById("positionLocation").innserHTML = "Coach";
-else {document.getElementById("positionLocation").innserHTML = "Player"; } */
 
 document.getElementById("edit").addEventListener("click", x =>{
 

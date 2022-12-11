@@ -17,7 +17,7 @@ document.getElementById("login").addEventListener("click", async x =>{
     } else{
 
     localStorage.setItem('username', data.username);
-    window.location.href= "profilePage.html";
+    window.location.href= `profilePage.html?username=${profile.username}`;
 
     document.getElementById("fullname").innerHTML = data.name;
     document.getElementById("personLocation").innerHTML = data.address;

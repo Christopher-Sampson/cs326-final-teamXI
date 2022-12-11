@@ -49,7 +49,7 @@ document.getElementById("register").addEventListener("click", async x =>{
     }
     else if(response.status == 200){
         localStorage.setItem('username', profile.username);
-        window.location.href= "profilePage.html";
+        window.location.href= `profilePage.html?username=${profile.username}`;
     }
     else{
         alert("Invalid parameter");

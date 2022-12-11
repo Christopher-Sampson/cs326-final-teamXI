@@ -61,11 +61,11 @@ export async function read(request, type){
       
     case "posts":
       const data2 = await pool.query(`SELECT * FROM posts WHERE id = $1`,[request.id]);
-      return data2.rows[0];
+      return data2;
 
     case "comments":
       const data3 = await pool.query(`SELECT * FROM comments WHERE id = $1`,[request.id]);
-      return data3.rows[0];
+      return data3;
 
     default:
       return "Invalid type";
