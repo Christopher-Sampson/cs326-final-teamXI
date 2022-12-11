@@ -45,19 +45,22 @@ document.getElementById("logout").addEventListener("click", x =>{
 
 });
 
-/*document.getElementById("deleteAcc").addEventListener("click", async x =>{
-
+document.getElementById("deleteAcc").addEventListener("click", async x =>{
+    const result = confirm("Are you sure?");
+    
+    if(result){
     const requestOptions = {
-        method: 'PUT',
+        method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: username })
     };
-    const response = await fetch("/profile/name",requestOptions);
-    const data = await response.json();
+    const response = await fetch("/profile/delete",requestOptions);
 
+    if(response.ok){
+        alert("Account has been deleted");
+        localStorage.clear();
+         window.location.href= "index.html";
+    }
+    }
 
-
-    localStorage.clear();
-    window.location.href= "index.html";
-
-});*/
+});

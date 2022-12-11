@@ -36,7 +36,7 @@ app.use( express.json() );
 app.use('/', express.static('./public'));
 
 
-app.post('/profile/new', async (req, res) => {
+app.post('/profile/new', async (req, res) => { //All good
 
 const checkAcc = await crud.read(req.body, "accounts");
 
@@ -62,7 +62,7 @@ if(checkAcc.rows.length > 0){
 
 });
 
-app.put('/profile/edit', (req, res) => { 
+app.put('/profile/edit', (req, res) => {  //All good
 
   crud.update(req.body, "accounts");
 
@@ -73,14 +73,14 @@ app.put('/profile/edit', (req, res) => {
 
 });
 
-app.put('/profile/Attributes', (req, res) => {//req.body shld be an object with {id: "someid to the attributes", update: {values to be updated} }
+/*app.put('/profile/Attributes', (req, res) => {
   
   crud.update(req.body, "attributes");
 
   res.json({
     status: 'success'
   });
-});
+});*/
 
 
 app.post('/post/new', (req, res) => {
@@ -101,7 +101,7 @@ app.post('/comment/new', (req, res) => {
   }); 
 });
 
-app.put('/profile/name', async (req, res) => {
+app.put('/profile/name', async (req, res) => {// All good
 
 const result = await crud.read(req.body, "accounts");
 
@@ -111,7 +111,7 @@ res.end();
 });
 
 
-app.post('/login/name', async (req, res) => {
+app.post('/login/name', async (req, res) => {//All good
 
   const checkPassword = req.body.passwords;
   const checkUsername = req.body.username;
@@ -147,29 +147,40 @@ app.post('/login/name', async (req, res) => {
 
 
 app.delete('/post/delete', (req, res) => { 
-   //some function that removes the post from the database
    crud.remove(req.body, "posts");
 
    res.json({
      status: 'success'
    }); 
+   res.end();
 });
 
 app.delete('/comment/delete', (req, res) => {
 
-//Deletes a comment from the comment database.
   crud.remove(req.body, "comments");
+  res.json({
+    status: 'success'
+  }); 
+  res.end();
 
 });
 
-app.delete('/profile/delete', (req, res) => { //req.body is like {id: "profile id", username: "profiles username"}
+app.delete('/profile/delete', (req, res) => { //All good
 
-  crud.remove(req.body, "profile")//removes user from profile table and all other tables associated with that user.
+  crud.remove(req.body, "accounts");
+  res.json({
+    status: 'success'
+  }); 
+  res.end();
 
 });
+
+
 
 app.get('*', (req, res) => {
   res.sendFile('index.html', { root: path.join(__dirname, '../public') });
 });
+
+
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));

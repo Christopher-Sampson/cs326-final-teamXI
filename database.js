@@ -67,11 +67,6 @@ export async function read(request, type){
       const data3 = await pool.query(`SELECT * FROM comments WHERE id = $1`,[request.id]);
       return data3.rows[0];
 
-    /*case "attributes":
-      client.query('SELECT * FROM attributes', request);
-      break;*/
-      //not required per the api BUT could be usefull to implement later
-
     default:
       return "Invalid type";
 
@@ -101,8 +96,8 @@ export async function update(request, type){
 export async function remove(request, type){
   
   switch(type){
-    case "account":
-      pool.query(`DELETE FROM accounts WHERE id = $1, AND username =$2`,[request.id,request.username]);
+    case "accounts":
+      pool.query(`DELETE FROM accounts WHERE username =$1`,[request.username]);
       pool.query(`DELETE FROM posts WHERE profile_id = $1`,[request.id]);
       pool.query(`DELETE FROM attributes WHERE profile_id = $1`,[request.id]);
       pool.query(`DELETE FROM comments WHERE commentor_id = $1`,[request.id]);
