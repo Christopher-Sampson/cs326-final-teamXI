@@ -107,21 +107,25 @@ app.post('/login/name', async (req, res) => {
 
     //const response = await crud.read(req.body, "accounts");
     pool.query('SELECT * FROM accounts WHERE username = $1',[checkUsername], function(error,results,fields){
+      
+      if(error) throw error
 
-      if (error){
+      if (results.rows == 0){
         res.send({error:"Account does not exist"});
         res.end();
       }
+      else{
 
-      results = results.rows[0];
+        results = results.rows[0];
 
-      if (mc.check(checkPassword,results.salt,results.password)) {
-        res.send(results);
-      } else {
-        res.send({error:'Incorrect Username and/or Password!'});
-      }			
-      res.end();
-    });
+        if (mc.check(checkPassword,results.salt,results.password)) {
+          res.send(results);
+        } else {
+          res.send({error:'Incorrect Username and/or Password!'});
+        }			
+        
+        res.end();
+    }});
   
   } else {
     res.send({error:'Please enter Username and Password!'});
