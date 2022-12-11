@@ -56,7 +56,10 @@ export async function read(request, type){
     case "accounts":
       
       const data = await pool.query('SELECT * FROM accounts WHERE username = $1',[request.usersname] );
-      return data.rows[0];
+      if(data != undefined){
+        return data.rows[0];
+      }
+      else{ return {error: "Invalid parameters"} }
 
     case "posts":
       const data2 = await pool.query(`SELECT * FROM posts WHERE id = $1`,[request.id]);

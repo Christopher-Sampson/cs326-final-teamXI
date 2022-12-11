@@ -85,11 +85,12 @@ app.put('/login/name', async (req, res) => {
 
   const response = await crud.read(req.body, "accounts");
   
-  if(mc.check(check ,response.salt,response.password)){
+  if(response != undefined){
+    mc.check(check ,response.salt,response.password);
     res.send(response);
   }
   else{
-    res.send("Not Valid Password");
+    res.send({error: "Invalid login"});
   }
   
 
