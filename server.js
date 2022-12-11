@@ -93,8 +93,6 @@ app.put('/login/name', async (req, res) => {
     res.send({error: "Invalid login"});
   }
   
-
-  
   
 });
 

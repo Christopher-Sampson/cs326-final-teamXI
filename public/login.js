@@ -10,7 +10,7 @@ document.getElementById("login").addEventListener("click", async x =>{
     const response = await fetch("/login/name",requestOptions);
 
 
-    if(response.json != undefined){
+    if(response.json() != undefined){
     const data = await response.json();
     localStorage.setItem('username', data.username);
     window.location.href= "profilePage.html";
