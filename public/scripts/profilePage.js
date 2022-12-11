@@ -1,12 +1,11 @@
 
 const username = localStorage.getItem('username');
-
 async function render(username){
 
     const requestOptions = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ usersname: username })
+        body: JSON.stringify({ username: username })
     };
     const response = await fetch("/profile/name",requestOptions);
     const data = await response.json();
@@ -45,3 +44,20 @@ document.getElementById("logout").addEventListener("click", x =>{
     window.location.href= "index.html";
 
 });
+
+/*document.getElementById("deleteAcc").addEventListener("click", async x =>{
+
+    const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: username })
+    };
+    const response = await fetch("/profile/name",requestOptions);
+    const data = await response.json();
+
+
+
+    localStorage.clear();
+    window.location.href= "index.html";
+
+});*/

@@ -40,8 +40,14 @@ document.getElementById("register").addEventListener("click", async x =>{
         },
         body: JSON.stringify(profile),
     });
+
+    const data = await response.json();
     
-    if(response.status == 200){
+    console.log(data);
+    if(data.error){
+        alert(data.error);
+    }
+    else if(response.status == 200){
         localStorage.setItem('username', profile.username);
         window.location.href= "profilePage.html";
     }

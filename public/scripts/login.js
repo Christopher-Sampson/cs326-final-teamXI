@@ -5,7 +5,7 @@ document.getElementById("login").addEventListener("click", async x =>{
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ usersname: username, passwords: password })
+        body: JSON.stringify({ username: username, passwords: password })
     };
     const response = await fetch("/login/name",requestOptions);
     

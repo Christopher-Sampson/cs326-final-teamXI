@@ -36,18 +36,28 @@ app.use( express.json() );
 app.use('/', express.static('./public'));
 
 
-app.post('/profile/new', (req, res) => {
-  
-  
+app.post('/profile/new', async (req, res) => {
+
+const checkAcc = await crud.read(req.body, "accounts");
+
+if(checkAcc.rows.length > 0){
+  res.send({error:"Account already exists"});
+  res.end()
+
+}else{
   const [salt,hash] = mc.hash(req.body.password);
 
   req.body.salt = salt;
   req.body.password = hash;  
+
   crud.create(req.body, "accounts");
-  
+
   res.json(JSON.stringify({
     status: 'success'
   }));
+  res.end();
+  }
+
   res.end();
 
 });
@@ -94,9 +104,8 @@ app.post('/comment/new', (req, res) => {
 app.put('/profile/name', async (req, res) => {
 
 const result = await crud.read(req.body, "accounts");
-console.log(result);
 
-res.send(result);
+res.send(result.rows[0]);
 res.end();
 
 });
@@ -105,16 +114,15 @@ res.end();
 app.post('/login/name', async (req, res) => {
 
   const checkPassword = req.body.passwords;
-  const checkUsername = req.body.usersname;
+  const checkUsername = req.body.username;
   
   if(checkUsername && checkPassword){
 
-    //const response = await crud.read(req.body, "accounts");
-    pool.query('SELECT * FROM accounts WHERE username = $1',[checkUsername], function(error,results,fields){
+    pool.query('SELECT * FROM accounts WHERE username = $1',[checkUsername], function(error,results){
       
       if(error) throw error
 
-      if (results.rows == 0){
+      if (results.rows.length == 0){
         res.send({error:"Account does not exist"});
         res.end();
       }
@@ -136,14 +144,6 @@ app.post('/login/name', async (req, res) => {
 		res.end();
   }
 });
-
-
-
-
-
-
-
-
 
 
 app.delete('/post/delete', (req, res) => { 
