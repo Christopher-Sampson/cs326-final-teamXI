@@ -12,7 +12,7 @@ document.getElementById("login").addEventListener("click", async x =>{
     const data = await response.json();
 
     if(data.error){
-        alert("Wrong Password");
+        alert(data.error);
         window.location.href= "index.html";
     } else{
 
