@@ -1,13 +1,17 @@
 import express, { response } from 'express';
 const app = express();
 import secrets from './secrets.json'assert {type: "json"};
-const PORT = process.env.PORT || secrets.port;
 import * as path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 import * as crud from './database.js';
 import { MiniCrypt } from "./miniCrypt.js";
 const mc = new MiniCrypt();
 import pkg from 'pg';
 const { Pool } = pkg;
+
+const PORT = process.env.PORT || secrets.port;
 const URL =  process.env.DATABASE_URL || secrets.URI;
 
 const pool = new Pool({
@@ -31,16 +35,15 @@ const pool = new Pool({
 app.use( express.json() );
 app.use('/', express.static('./public'));
 
-//Parse info appropriately then return to the correct function from databse.js and then return info to client.
-app.post('/profile/new', (req, res) => { //request is a object with account data
+
+app.post('/profile/new', (req, res) => {
   
   
   const [salt,hash] = mc.hash(req.body.password);
 
   req.body.salt = salt;
   req.body.password = hash;  
-
-  crud.create(req.body, "accounts");// Some function that inserts req.body into the appropriate database.
+// Some function that inserts req.body into the appropriate database.
 
 
   res.json(JSON.stringify({
@@ -50,17 +53,30 @@ app.post('/profile/new', (req, res) => { //request is a object with account data
 
 });
 
-app.put('profile/edit', (req, res) => {//req.body shld be an object with {id: "someid to the profile", update: {values to be updated} }
 
-  crud.update(req.body, "accounts");// Some function that updates the profile with the specific id with the updates wanted
+
+
+
+
+
+app.put('/profile/edit', (req, res) => { 
+
+  crud.update(req.body, "accounts");
 
   res.json({
     status: 'success'
   });
+  res.end()
 
 });
 
-app.put('profile/Attributes', (req, res) => {//req.body shld be an object with {id: "someid to the attributes", update: {values to be updated} }
+
+
+
+
+
+
+app.put('/profile/Attributes', (req, res) => {//req.body shld be an object with {id: "someid to the attributes", update: {values to be updated} }
   
   crud.update(req.body, "attributes");
 
@@ -70,16 +86,16 @@ app.put('profile/Attributes', (req, res) => {//req.body shld be an object with {
 });
 
 
-app.post('/post/new', (req, res) => {//request is a object with the new post
+app.post('/post/new', (req, res) => {
   
-  crud.create(req.body, "posts");//function that will add req.body to the post table from database.js
+  crud.create(req.body, "posts");
 
   res.json({
     status: 'success'
   }); 
 });
 
-app.post('/comment/new', (req, res) => {//request is a object with the new comment
+app.post('/comment/new', (req, res) => {
   
   crud.create(req.body, "comments");
 
@@ -89,6 +105,9 @@ app.post('/comment/new', (req, res) => {//request is a object with the new comme
 });
 
 
+
+
+
 app.put('/profile/name', async (req, res) => {
 
 const result = await crud.read(req.body, "accounts");
@@ -96,6 +115,10 @@ const result = await crud.read(req.body, "accounts");
 res.send(result);
 
 });
+
+
+
+
 
 
 app.post('/login/name', async (req, res) => {
@@ -133,14 +156,14 @@ app.post('/login/name', async (req, res) => {
   }
 });
 
-/*app.get('/home', function(request, response) {
-	if (request.session.loggedin) {
-		response.send('Welcome back, ' + request.session.username + '!');
-	} else {
-		response.send('Please login to view this page!');
-	}
-	response.end();
-});*/
+
+
+
+
+
+
+
+
 
 app.delete('/post/delete', (req, res) => { 
    //some function that removes the post from the database

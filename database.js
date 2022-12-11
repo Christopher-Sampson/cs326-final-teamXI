@@ -85,8 +85,8 @@ export async function update(request, type){
   
   switch(type){         
     case "accounts":
-      pool.query(`UPDATE accounts SET name = $1, username = $2, password = $3, email = $4, phone = $5, twitter = $6, instagram = $7, iscoach = $8, address = $9, salt = $10 WHERE id = $11`,
-      [request.name,request.username,request.password, request.email, request.phone, request.twitter, request.instagram, request.iscoach, request.address, request.salt, request.id]);
+      pool.query(`UPDATE accounts SET name = $1, email = $2, phone = $3, address = $4 WHERE username = $5`,
+      [request.name,request.email, request.phone, request.address,request.username]);
       break;
 
     case "attributes":
