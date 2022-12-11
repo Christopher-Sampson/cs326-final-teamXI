@@ -108,7 +108,10 @@ app.post('/login/name', async (req, res) => {
     //const response = await crud.read(req.body, "accounts");
     pool.query('SELECT * FROM accounts WHERE username = $1',[checkUsername], function(error,results,fields){
 
-      if (error) throw res.send({error:"Account does not exist"});
+      if (error){
+        res.send({error:"Account does not exist"});
+        res.end();
+      }
 
       results = results.rows[0];
 
