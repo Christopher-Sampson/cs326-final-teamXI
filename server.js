@@ -43,21 +43,14 @@ app.post('/profile/new', (req, res) => {
 
   req.body.salt = salt;
   req.body.password = hash;  
-// Some function that inserts req.body into the appropriate database.
-
-
+  crud.create(req.body, "accounts");
+  
   res.json(JSON.stringify({
     status: 'success'
   }));
   res.end();
 
 });
-
-
-
-
-
-
 
 app.put('/profile/edit', (req, res) => { 
 
@@ -69,12 +62,6 @@ app.put('/profile/edit', (req, res) => {
   res.end()
 
 });
-
-
-
-
-
-
 
 app.put('/profile/Attributes', (req, res) => {//req.body shld be an object with {id: "someid to the attributes", update: {values to be updated} }
   
@@ -104,21 +91,15 @@ app.post('/comment/new', (req, res) => {
   }); 
 });
 
-
-
-
-
 app.put('/profile/name', async (req, res) => {
 
 const result = await crud.read(req.body, "accounts");
+console.log(result);
 
 res.send(result);
+res.end();
 
 });
-
-
-
-
 
 
 app.post('/login/name', async (req, res) => {
