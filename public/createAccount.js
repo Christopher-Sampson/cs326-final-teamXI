@@ -26,6 +26,13 @@ document.getElementById("register").addEventListener("click", async x =>{
     }*/
 
 
+    if(profile.phone.length > 10 ){
+        alert("Phone number too long.");
+    }
+    else if (profile.password.length < 12){
+        alert("Password is too short.")
+    }
+    else{
     const response = await fetch('/profile/new', {
         method: 'POST',
         headers: {
@@ -34,7 +41,8 @@ document.getElementById("register").addEventListener("click", async x =>{
         body: JSON.stringify(profile),
     });
     
-    if(response.ok){
+    console.log(response.status);
+    if(response.status == 200){
         localStorage.setItem('username', profile.username);
         window.location.href= "profilePage.html";
     }
@@ -42,5 +50,5 @@ document.getElementById("register").addEventListener("click", async x =>{
         alert("Invalid parameter");
     }
 
-
+    }
 });

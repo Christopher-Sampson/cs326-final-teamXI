@@ -1,13 +1,31 @@
-import express from 'express';
+import express, { response } from 'express';
 const app = express();
 import secrets from './secrets.json'assert {type: "json"};
 const PORT = process.env.PORT || secrets.port;
 import * as path from 'path';
 import * as crud from './database.js';
 import { MiniCrypt } from "./miniCrypt.js";
-import { checkPrime } from 'crypto';
 const mc = new MiniCrypt();
+import pkg from 'pg';
+const { Pool } = pkg;
+const URL =  process.env.DATABASE_URL || secrets.URI;
 
+const pool = new Pool({
+    connectionString: URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
+});
+
+ pool.connect(
+  err => {
+    if(err) {
+      console.error("connection error", err.stack)
+    } else {
+      console.log('connected')
+    }
+  }
+);
 
 
 app.use( express.json() );
@@ -28,6 +46,7 @@ app.post('/profile/new', (req, res) => { //request is a object with account data
   res.json(JSON.stringify({
     status: 'success'
   }));
+  res.end();
 
 });
 
@@ -79,22 +98,42 @@ res.send(result);
 });
 
 
-app.put('/login/name', async (req, res) => {
+app.post('/login/name', async (req, res) => {
 
-  const check = req.body.passwords;
+  const checkPassword = req.body.passwords;
+  const checkUsername = req.body.usersname;
+  
+  if(checkUsername && checkPassword){
 
-  const response = await crud.read(req.body, "accounts");
+    //const response = await crud.read(req.body, "accounts");
+    pool.query('SELECT * FROM accounts WHERE username = $1',[checkUsername], function(error,results,fields){
+
+      if (error) throw error;
+
+      results = results.rows[0];
+
+      if (mc.check(checkPassword,results.salt,results.password)) {
+        res.send(results);
+      } else {
+        res.send({error:'Incorrect Username and/or Password!'});
+      }			
+      res.end();
+    });
   
-  if(response != undefined){
-    mc.check(check ,response.salt,response.password);
-    res.send(response);
+  } else {
+    res.send({error:'Please enter Username and Password!'});
+		res.end();
   }
-  else{
-    res.send({error: "Invalid login"});
-  }
-  
-  
 });
+
+/*app.get('/home', function(request, response) {
+	if (request.session.loggedin) {
+		response.send('Welcome back, ' + request.session.username + '!');
+	} else {
+		response.send('Please login to view this page!');
+	}
+	response.end();
+});*/
 
 app.delete('/post/delete', (req, res) => { 
    //some function that removes the post from the database
