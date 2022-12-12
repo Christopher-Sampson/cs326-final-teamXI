@@ -1,6 +1,5 @@
 
 const username = localStorage.getItem('username');
-const profile = await render(username);
 
 document.getElementById("profilepage").addEventListener("click",  () =>{
 

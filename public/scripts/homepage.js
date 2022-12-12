@@ -12,7 +12,6 @@ async function  loadAllSavedposts() {
         }
     });
     let res  = await response.json();
-    console.log(res);
     const posts = res.send[0].rows;
     const comments = res.send[1].rows;
     if (posts.length> 0){
