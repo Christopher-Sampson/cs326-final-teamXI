@@ -26,7 +26,7 @@ document.getElementById("personUsername").innerHTML = profile.username;
 document.getElementById("desc").innerHTML = profile.description;
 
 let number = 0;
-if(profile.iscoach){
+if(!profile.iscoach){
     number = Math.floor(Math.random() * 5) + 1;
     document.getElementById("profileImg").src = `images/${number}.jpg`;
 }
