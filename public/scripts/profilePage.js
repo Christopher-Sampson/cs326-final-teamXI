@@ -35,19 +35,19 @@ else{
     document.getElementById("profileImg").src = `images/${number}.jpg`;
 }
 
-document.getElementById("edit").addEventListener("click", () =>{
+document.getElementById("editpfp").addEventListener("click", () =>{
 
     window.location.href= `edit.html?username=${profile.username}`;
 
 });
 
-document.getElementById("homepage").addEventListener("click", () =>{
+document.getElementById("homepagepfp").addEventListener("click", () =>{
 
     window.location.href= `homePage.html?username=${profile.username}`;
 
 });
 
-document.getElementById("logout").addEventListener("click", () =>{
+document.getElementById("logoutpfp").addEventListener("click", () =>{
 
     localStorage.clear();
     window.location.href= "index.html";
