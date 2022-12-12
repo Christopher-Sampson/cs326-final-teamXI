@@ -7,12 +7,8 @@ document.getElementById("save").addEventListener("click", async x =>{
     profile.email = document.getElementById("editEmail").value;
     profile.phone = document.getElementById("editPhone").value;
     profile.address = document.getElementById("editAddress").value;
+    profile.description = document.getElementById("editDesc").value;
     profile.username = username;
-    /*if (document.getElementById("iscoach").checked){
-        profile.iscoach = true;
-    }else{
-        profile.iscoach = false;
-    }*/
     if(profile.phone.length > 10 || /{a-z}/.test(profile.phone)){
         alert("Phone number too long / or incorrect format.");
     }

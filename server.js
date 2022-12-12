@@ -1,4 +1,4 @@
-import express, { response } from 'express';
+import express from 'express';
 const app = express();
 import secrets from './secrets.json'assert {type: "json"};
 import * as path from 'path';
@@ -36,9 +36,10 @@ app.use( express.json() );
 app.use('/', express.static('./public'));
 
 
-app.post('/profile/new', async (req, res) => { //All good
+app.post('/profile/new', async (req, res) => { //All done
 
 const checkAcc = await crud.read(req.body, "accounts");
+
 
 if(checkAcc.rows.length > 0){
   res.send({error:"Account already exists"});
@@ -62,9 +63,9 @@ if(checkAcc.rows.length > 0){
 
 });
 
-app.put('/profile/edit', (req, res) => {  //All good
+app.put('/profile/edit', (req, res) => {  //All done
 
-  crud.update(req.body, "accounts");
+  crud.update(req.body);
 
   res.json({
     status: 'success'
@@ -73,35 +74,36 @@ app.put('/profile/edit', (req, res) => {  //All good
 
 });
 
-/*app.put('/profile/Attributes', (req, res) => {
+app.get('/post/comment/get', async (req, res) => {
   
-  crud.update(req.body, "attributes");
+  const posts = await pool.query("SELECT * FROM posts ORDER BY timeposted ASC");
+  const comments = await pool.query("SELECT * FROM comments ORDER BY post_id ASC");
+  res.send({send: [posts, comments]});
+  res.end();
+
+});
+
+
+app.post('/post/new', async (req, res) => {
+  
+  await crud.create(req.body, "posts");
 
   res.json({
     status: 'success'
-  });
-});*/
+  }); 
 
+});
 
-app.post('/post/new', (req, res) => {
+app.post('/comment/new', async (req, res) => {
   
-  crud.create(req.body, "posts");
+  await crud.create(req.body, "comments");
 
   res.json({
     status: 'success'
   }); 
 });
 
-app.post('/comment/new', (req, res) => {
-  
-  crud.create(req.body, "comments");
-
-  res.json({
-    status: 'success'
-  }); 
-});
-
-app.put('/profile/name', async (req, res) => {// All good
+app.put('/profile/name', async (req, res) => { //all done
 
 const result = await crud.read(req.body, "accounts");
 
@@ -111,7 +113,7 @@ res.end();
 });
 
 
-app.post('/login/name', async (req, res) => {//All good
+app.post('/login/name', async (req, res) => { //all done
 
   const checkPassword = req.body.passwords;
   const checkUsername = req.body.username;
@@ -146,41 +148,18 @@ app.post('/login/name', async (req, res) => {//All good
 });
 
 
-app.delete('/post/delete', (req, res) => { 
-   crud.remove(req.body, "posts");
+app.delete('/profile/delete', (req, res) => { //all done
 
-   res.json({
-     status: 'success'
-   }); 
-   res.end();
-});
-
-app.delete('/comment/delete', (req, res) => {
-
-  crud.remove(req.body, "comments");
+  crud.remove(req.body);
   res.json({
     status: 'success'
   }); 
   res.end();
 
 });
-
-app.delete('/profile/delete', (req, res) => { //All good
-
-  crud.remove(req.body, "accounts");
-  res.json({
-    status: 'success'
-  }); 
-  res.end();
-
-});
-
-
 
 app.get('*', (req, res) => {
-  res.sendFile('index.html', { root: path.join(__dirname, '../public') });
+  res.sendFile('index.html', { root: path.join(__dirname, './public') });
 });
-
-
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));

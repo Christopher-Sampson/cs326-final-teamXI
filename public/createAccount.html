@@ -114,14 +114,26 @@
 
                   <hr class="mx-n3">
                   <div class="row align-items-center py-3">
-                    <div class="col px-5 pe-5">
-                        <form>
-                            
-                            <label class="radio-inline"><input id = "iscoach" type="radio" name="optradio" checked>Coach</label>
-                            <label class="radio-inline"><input id = "isplayer" type="radio" name="optradio">Player</label>
-                        </form>
-                    </div>
-                  </div>
+                    
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <div class="col-6 ">
+                        <label class="btn btn-secondary active w-100">
+                        <input type="radio" name="options" id="iscoach" autocomplete="off" > Coach
+                        </label>
+                      </div>
+                      <div class="col-6 ">
+                        <label class="btn btn-secondary w-100">
+                        <input type="radio" name="options" id="isplayer" autocomplete="off"> Player
+                        </label>
+                      </div>
+                      
+                   </div>
+                  
+                </div>
+                <label for="freeform">Tell us about you!</label>
+                <br>
+                <textarea id="description" name="freeform" rows="4" cols="50">
+                </textarea><br><br>
 
                   <div class="row align-items-center py-3">
                     
@@ -141,14 +153,9 @@
             </div>
           </div>
         </div>
-        <!-- Use these as templete i just switch in an out or input of coach or player -->
-        <!-- coach -->
+
         <div class="slidercoach" style="display: none;">
-            
-
-
         </div>
-        <!-- player -->
         <div class="sliderplayer" style="display: none;">
             
 

@@ -9,22 +9,12 @@ document.getElementById("register").addEventListener("click", async x =>{
     profile.twitter = document.getElementById("twitter").value;
     profile.instagram = document.getElementById("instagram").value;
     profile.address = document.getElementById("address").value;
+    profile.description = document.getElementById("description").value;
     if (document.getElementById("iscoach").checked){
         profile.iscoach = true;
     }else{
         profile.iscoach = false;
     }
-    /*const divImage = document.getElementById("imgGrid");
-    for (i = 1; i < 11; i++){
-        const img = document.createElement(i.toString());
-        img.setAttribute("src", "public/images/" + i.toString());
-        img.setAttribute("height", "100");
-        img.setAttribute("width", "100");
-        divImage.appendChild(img);
-        console.log("hi");
-
-    }*/
-
 
     if(profile.phone.length > 10 || /{a-z}/.test(profile.phone)){
         alert("Phone number too long.");
@@ -43,7 +33,6 @@ document.getElementById("register").addEventListener("click", async x =>{
 
     const data = await response.json();
     
-    console.log(data);
     if(data.error){
         alert(data.error);
     }
