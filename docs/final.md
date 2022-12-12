@@ -25,22 +25,21 @@ Christopher-Sampson: Christopher Sampson
   
 
 ## **Login Page:**
-![Screenshot 2022-12-11 214113](https://user-images.githubusercontent.com/113072996/206961027-0e9afa0e-a9b7-45b8-89ef-7e1c5101f10b.png)
+
+--insert image
 
 User will Login to either their Coach or Player profiles and then be moved to the general homepage. They can create an account on here as well.
 
 ## Home Page:
 
-![Screenshot 2022-12-11 233330](https://user-images.githubusercontent.com/113072996/206961377-734b4561-9e59-48b6-8e0d-0dd7501e4aa8.png)
-
+--insert image
 
 The image above is the application's home page. A general feed will appear in the center, about players and events that are being hosted by coaches. Users can go and check their profiles from here and create events if they are coaches. At the top users can search other players, coaches, events, etc in order to navigate the site.
 
 
 ## Profile Page:
   
-![Screenshot 2022-12-11 233222](https://user-images.githubusercontent.com/113072996/206961285-59721a5e-3ef0-4ee5-b3c6-13a48bd2e445.png)
-
+--insert image
 
 This is a persons profile page. They can put in their personal information, like location, phone number, and more. They also have a small text box to describe themselves in further detail.
 
@@ -48,7 +47,7 @@ This is a persons profile page. They can put in their personal information, like
 
 ## Edit Page:
 
-![Screenshot 2022-12-11 233450](https://user-images.githubusercontent.com/113072996/206961540-d06a55e8-4841-427e-9977-a6958ba007d8.png)
+--insert image
 
 Here user will be able to edit information about themselves. Such as location, phone number, email, and their socials.
 
@@ -56,8 +55,7 @@ Here user will be able to edit information about themselves. Such as location, p
 
 ## Create Account:
 
-![Screenshot 2022-12-11 233528](https://user-images.githubusercontent.com/113072996/206961592-3623523d-ca6a-492e-b586-36d437864fb4.png)
-
+--image insert
 
 Here users will be able to register for an account and log right into their profile.
 

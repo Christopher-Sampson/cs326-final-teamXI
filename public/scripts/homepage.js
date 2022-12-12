@@ -1,7 +1,7 @@
 
 const postbutton = document.getElementById('postbutton');
 const container = document.getElementById('postcontainer');
-const username = localStorage.getItem('username');
+let username = localStorage.getItem('username');
 
 loadAllSavedposts();
 async function  loadAllSavedposts() {

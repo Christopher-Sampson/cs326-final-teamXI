@@ -1,5 +1,5 @@
 
-const username = localStorage.getItem('username');
+let username = localStorage.getItem('username');
 
 async function render(username){
 
